@@ -1,0 +1,24 @@
+<mat-card>
+    <div class="details-wrapper">
+        <button class="go-back-button" mat-raised-button (click)="goBack()">Go back</button>
+        <div class="profile-container">
+            <div>
+                <img [src]="user.avatar" alt="{{ user.first_name }}" class="avatar-image">
+            </div>
+            <div>
+                <mat-card-title>{{"Id: " + user.id}}</mat-card-title>
+                <mat-card-title>{{"First Name: " + user.first_name}}</mat-card-title>
+                <mat-card-title>{{"Last Name: " + user.last_name}}</mat-card-title>
+                <mat-card-title>{{"Email Id: " + user.email}}</mat-card-title>
+
+            </div>
+
+        </div>
+    </div>
+
+</mat-card>
+<div *ngIf="isLoading">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+        <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+</div>

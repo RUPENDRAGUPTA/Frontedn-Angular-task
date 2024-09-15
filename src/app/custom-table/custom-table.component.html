@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-form-field class="search">
+    <mat-label>Search </mat-label>
+    <input matInput [formControl]="searchKeywordFilter" placeholder="Type to Search" #input />
+  </mat-form-field>
+
+  <div class="table-wrapper">
+    <div>
+      <table mat-table [dataSource]="data">
+        <ng-container matColumnDef="avatar">
+          <th mat-header-cell *matHeaderCellDef>Profile</th>
+          <td mat-cell *matCellDef="let row" (click)="goToDetails(row.id)" class="row-pointer">
+            <img [src]="row.avatar" alt="{{ row.first_name }}" class="avatar-image">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row" class="row-pointer" (click)="goToDetails(row.id)">{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="first_name">
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let row" class="row-pointer" (click)="goToDetails(row.id)">{{ row.first_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let row" class="row-pointer" (click)="goToDetails(row.id)">{{ row.last_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>
+            Email Id
+          </th>
+          <td mat-cell *matCellDef="let row" class="row-pointer" (click)="goToDetails(row.id)">{{ row.email}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [length]="totalCount" [pageSizeOptions]="pageSizes" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>
+
+<div *ngIf="isLoading">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+</div>
